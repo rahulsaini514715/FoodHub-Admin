@@ -25,15 +25,17 @@ app.use(
 );
 
 // app.use(cors({ origin: "http://localhost:3000" }));
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "http://192.168.1.36:3001/",
-    ],
-  })
-);
 
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "http://192.168.1.45:3001/",
+//     ],
+//   })
+// );
+
+app.use(cors());
 
 app.use(express.json());
 app.use(bodyParser.raw({ type: "application/json" }));
