@@ -93,7 +93,7 @@ async function deleteProduct(req, res) {
     const { id } = req.params;
 
     await prisma.product.delete({
-      where: { id: Number(id) } // convert if id is Int in schema
+      where: {id} // convert if id is Int in schema
     });
 
     res.json({ message: "Product deleted" });
