@@ -40,7 +40,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.raw({ type: "application/json" }));
 
-//route wit API VERSIONING 
+//route with API VERSIONING 
 app.use("/api/v1/categories",categoryRoutes);
 app.use("/api/v1/products",productRoutes)
 

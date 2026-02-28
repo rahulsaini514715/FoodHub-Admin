@@ -6,10 +6,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCategory } from "../api/apiClient";
 import { useNavigation } from "@react-navigation/native";
 
+
+// useQuery -> ['categories']
+//useMutation -> (create/update/delete) this -> mutationFN -> return a promise
+
+
 type CategoryForm = {
   name: string;
   imageUrl?: string;
 };
+
+
 
 const AddCategoryScreen = () => {
   const navigation = useNavigation();
