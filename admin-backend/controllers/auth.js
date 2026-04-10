@@ -1,3 +1,5 @@
+const { sendEmailWithRetry } = require("../utils/emailQueue");
+
 const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
@@ -61,10 +63,42 @@ async function signup(req, res) {
         `,
     };
 
-    sendEmailWithRetry(mailOptions).catch(error => logger.error(`Failed to send welcome email after retries`,error));
-    res.json({user,token});
+    sendEmailWithRetry(mailOptions).catch((error) =>
+      logger.error(`Failed to send welcome email after retries`, error),
+    );
+    res.json({ user, token });
   } catch (error) {
     logger.error(error);
     throw error;
   }
 }
+
+async function login(req, res) {
+  const { email, password } = req.body;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user || !user.password) {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+    res.json({ user, token });
+  } catch (error) {
+    logger.error(error);
+    throw error;
+  }
+}
+
+
+module.exports = {signup, login}

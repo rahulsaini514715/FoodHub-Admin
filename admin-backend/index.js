@@ -7,6 +7,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const rateLimit = require("express-rate-limit");
+const authRoutes = require("./routes/auth")
 const crypto = require("crypto");
 
 const categoryRoutes = require("./routes/categories");
@@ -43,6 +44,8 @@ app.use(bodyParser.raw({ type: "application/json" }));
 //route with API VERSIONING 
 app.use("/api/v1/categories",categoryRoutes);
 app.use("/api/v1/products",productRoutes)
+app.use('/api/v1/auth', authRoutes)
+
 
 app.use(errorHandler)
 // console.log("DATABASE:", process.env.DATABASE_URL);
