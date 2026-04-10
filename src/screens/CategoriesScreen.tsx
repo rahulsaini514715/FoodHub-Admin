@@ -77,7 +77,12 @@ const CategoriesScreen = () => {
       </View>
 
       <View className="flex-row items-center">
-        <TouchableOpacity className="p-2 rounded-md mr-2 bg-blue-50">
+        <TouchableOpacity onPress={() => navigation.navigate("EditCategory", {
+          categoryId: item.id,
+          categoryName: item?.name
+        })
+        }
+          className="p-2 rounded-md mr-2 bg-blue-50">
           <Ionicons name="pencil" size={18} color="#2563EB" />
         </TouchableOpacity>
 

@@ -5,6 +5,7 @@ import CategoriesScreen from "../screens/CategoriesScreen";
 import AddCategoryScreen from "../screens/AddCategoryScreen";
 import ProductsScreen from "../screens/ProductsScreen";
 import AddProductScreen from "../screens/AddProductScreen";
+import EditCategory from "../screens/EditCategory";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,16 @@ const CategoriesStack = () => {
           title: "Add Product",
         })}
       />
+
+      <Stack.Screen
+        name="EditCategory"
+        component={EditCategory}
+        options={({ route }) => ({
+          title: "Edit Category",
+        })}
+      />
+
+      
     </Stack.Navigator>
   );
 };
